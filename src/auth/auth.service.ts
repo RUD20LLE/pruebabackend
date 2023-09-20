@@ -6,11 +6,14 @@ export class AuthService {
   constructor(private usersService: UsersService) {}
 
   async validateUser(username: string, pass: string): Promise<any> {
+    console.log('AuthService: validateUser called with username:', username);
     const user = await this.usersService.findOne(username);
     if (user && user.password === pass) {
+      console.log('AuthService: User validated successfully');
       const { ...result } = user;
       return result;
     }
+    console.log('AuthService: User validation failed');
     return null;
   }
 }

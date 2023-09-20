@@ -10,6 +10,7 @@ export class ToggleService {
   }
 
   getState() {
+    console.log('ToggleService: getState called');
     return this.isOn;
   }
 }

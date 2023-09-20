@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { User } from '../entities/user.entity';
+import { User } from '../entity/user.entity';
 
 @Injectable()
 export class UsersService {
@@ -13,11 +13,11 @@ export class UsersService {
   async create(username: string, password: string): Promise<User> {
     const user = new User();
     user.username = username;
-    user.password = password; // En una aplicación real, asegúrate de hashear la contraseña antes de guardarla
+    user.password = password;
     return this.usersRepository.save(user);
   }
 
   async findOne(username: string): Promise<User | undefined> {
-    return this.usersRepository.findOne({ where: { username: username } });
+    return this.usersRepository.findOne({ where: { username } });
   }
 }
