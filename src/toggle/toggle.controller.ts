@@ -1,7 +1,10 @@
 import { Controller, Get, Post } from '@nestjs/common';
 import { ToggleService } from './toggle.service';
+import { JwtAuthGuard } from '../jwt-auth/jwt-auth.guard';
+import { UseGuards } from '@nestjs/common';
 
-@Controller('toggle/')
+@UseGuards(JwtAuthGuard)
+@Controller('toggle')
 export class ToggleController {
   constructor(private toggleService: ToggleService) {}
 
@@ -14,7 +17,6 @@ export class ToggleController {
   @Post()
   toggle() {
     console.log('ToggleController: toggle called');
-    console.log('ToggleService: toggle called');
     return { isOn: this.toggleService.toggle() };
   }
 }

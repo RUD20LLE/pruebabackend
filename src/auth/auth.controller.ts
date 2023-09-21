@@ -5,7 +5,7 @@ import { AuthService } from './auth.service';
 export class AuthController {
   constructor(private authService: AuthService) {}
 
-  @Post('login/')
+  @Post('login')
   async login(@Body() body: { username: string; password: string }) {
     console.log('AuthController: login called with body:', body);
     return this.authService.validateUser(body.username, body.password);
